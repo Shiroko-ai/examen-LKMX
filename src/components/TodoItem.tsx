@@ -37,7 +37,7 @@ export default function TodoItem({ content, deleteItem, id }: Props) {
     else {
         return (
             <div className="flex flex-row mb-4 gap-4">
-                <h2 className="w-96 flex-1 items-center justify-self-center self-center text-ellipsis overflow-auto">{value}</h2>
+                <h2 className="w-96 flex-1 items-center justify-self-center self-center text-ellipsis overflow-auto">•  {value}</h2>
                 <Button
                     variant="icon"
                     type="button"

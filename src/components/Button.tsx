@@ -3,8 +3,8 @@ import React, { ReactNode } from "react"
 
 
 enum Variant {
-    ICON = 'text-white rounded border-2 border-slate-400 px-3 py-2 rounded-md bg-white',
-    TEXT = 'text-white bg-blue-600 py-2 px-3 rounded-md'
+    ICON = 'text-white rounded border-2 border-slate-400 px-3 py-2 rounded-md bg-white hover:bg-slate-200 transition',
+    TEXT = 'text-white bg-blue-600 py-2 px-3 rounded-md hover:bg-blue-400 transition'
 }
 
 
