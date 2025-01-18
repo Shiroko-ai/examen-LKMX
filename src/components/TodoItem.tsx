@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import IconDisk from '../assets/icon-disk.svg';
@@ -14,6 +14,10 @@ export interface Props {
 export default function TodoItem({ content, deleteItem, id }: Props) {
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [value, setValue] = useState<string>(content)
+
+    useEffect(()=>{
+        setValue(content)
+    },[content])
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setIsEditing(false)

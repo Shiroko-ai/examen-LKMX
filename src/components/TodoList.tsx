@@ -5,17 +5,17 @@ import React, { useState } from "react";
 interface Props{
     title: string
 }
-interface Todo {
-    id: number
-    content: string
-}
 export default function TodoList({title}: Props){
-    const [todos, setTodos] = useState<Array<Todo>>([])
+    const [todos, setTodos] = useState<Array<string>>([])
     const [inputValue, setInputValue] = useState<string>('')
-    const [id, setId] = useState<number>(0)
     const deleteItem = (id: number) =>{
+        setTodos((prevValues) => prevValues.filter((_,index) =>
+        {
+            return index!== id
+        }
 
-        setTodos((prevValues) => prevValues.filter((todo) => id !== todo.id))
+
+            ))
     }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setInputValue(e.target.value)
@@ -27,13 +27,12 @@ export default function TodoList({title}: Props){
         if(inputValue === ''){
             return
         }
-        setId(id + 1)
-        setTodos((preValue)=>[...preValue, {
-            id: id,
-            content: inputValue
-        }])
+        setTodos((preValue)=>[...preValue,
+            inputValue
+        ])
         setInputValue('')
     }
+
 
 
     return(
@@ -54,12 +53,12 @@ export default function TodoList({title}: Props){
                     </Button>
                 </form>
                 <div className="px-2 py-4 bg-slate-200 rounded mt-2">
-                    {todos.length > 0 ? todos.map((todo) => (
+                    {todos.length > 0 ? todos.map((todo, index) => (
                         <TodoItem
-                            key={todo.id}
-                            content={todo.content}
+                            key={index}
+                            content={todo}
                             deleteItem={deleteItem}
-                            id={todo.id} />
+                            id={index} />
                     )) : <h2 className="text-slate-500"> No has agregado tareas</h2>}
                 </div>
             </div>
