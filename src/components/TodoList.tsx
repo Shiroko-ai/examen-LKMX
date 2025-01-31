@@ -25,6 +25,9 @@ export default function TodoList({title}: Props){
             ))
     }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        if(e.target.value.startsWith(' ')){
+            return
+        }
         setInputValue(e.target.value)
     }
 
