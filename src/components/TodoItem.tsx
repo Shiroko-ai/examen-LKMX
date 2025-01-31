@@ -20,7 +20,7 @@ export default function TodoItem({ content, deleteItem, id }: Props) {
     },[content])
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(value.trim.length === 0){
+        if(value.trim().length === 0){
             deleteItem(id)
         }
         setIsEditing(false)
