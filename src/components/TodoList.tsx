@@ -1,17 +1,24 @@
 import Input from "./Input";
 import TodoItem from "./TodoItem";
 import Button from "./Button";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 interface Props{
     title: string
 }
+
+interface Todo{
+    value: string
+    id: number
+}
+
 export default function TodoList({title}: Props){
-    const [todos, setTodos] = useState<Array<string>>([])
+    const [todos, setTodos] = useState<Array<Todo>>([])
     const [inputValue, setInputValue] = useState<string>('')
+    const id = useRef(0)
     const deleteItem = (id: number) =>{
-        setTodos((prevValues) => prevValues.filter((_,index) =>
+        setTodos((prevValues) => prevValues.filter((todo) =>
         {
-            return index!== id
+            return todo.id !== id
         }
 
 
@@ -27,12 +34,15 @@ export default function TodoList({title}: Props){
         if(inputValue === ''){
             return
         }
+        id.current++
         setTodos((preValue)=>[...preValue,
-            inputValue
+            {
+                id: id.current,
+                value: inputValue
+            }
         ])
         setInputValue('')
     }
-
 
 
     return(
@@ -53,12 +63,13 @@ export default function TodoList({title}: Props){
                     </Button>
                 </form>
                 <div className="px-2 py-4 bg-slate-200 rounded mt-2">
-                    {todos.length > 0 ? todos.map((todo, index) => (
+                    {todos.length > 0 ? todos.map((todo) => (
                         <TodoItem
-                            key={index}
-                            content={todo}
+                            key={todo.id}
+                            content={todo.value}
                             deleteItem={deleteItem}
-                            id={index} />
+                            id={todo.id}
+                            />
                     )) : <h2 className="text-slate-500"> No has agregado tareas</h2>}
                 </div>
             </div>
