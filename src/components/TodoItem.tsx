@@ -23,6 +23,7 @@ export default function TodoItem({ content, deleteItem, id }: Props) {
         if(value.trim().length === 0){
             deleteItem(id)
         }
+        setValue(value.trim())
         setIsEditing(false)
     }
 
